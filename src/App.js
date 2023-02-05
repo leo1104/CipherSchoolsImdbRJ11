@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Home from './components/Home';
+import SearchResult from './components/SearchResult';
+import Movie from './components/Movie';
+
+
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home/>,
+    },
+    {
+      path:'/search/:movie/',
+      element:<SearchResult/>
+    },
+//if I want to extract something from the path => I will need a viarable
+// movie=> variable i.e it can vary for different conditions 
+
+    {
+      path:'/movie/:movieId',
+      element:<Movie/>
+    }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+   <RouterProvider router={router} />
+   </>
   );
 }
 
