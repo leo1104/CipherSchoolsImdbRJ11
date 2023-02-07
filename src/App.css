@@ -99,7 +99,7 @@ body{
   justify-content: space-between;
   align-items: flex-start;
 }
-.movieRating {
+.movieRatings {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,4 +171,55 @@ top: 8rem;
 
   .actorLink{
     text-decoration: none;
+  }
+
+  .actorCircle{
+    max-width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin-top: 2rem;
+    margin: auto;
+    border-radius:50%;
+  }
+  .actorCircle img{
+    width: 100%;
+    height: auto;
+  }
+  .actorDetails h1{
+    text-align: center;
+  }
+  .actorDetails p{
+    margin: 0 20%;
+    letter-spacing: 1px;
+  }
+
+  .actorDetails h2{
+    text-align: center;
+    margin: 0 20%;
+    font-weight: bold;
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+
+  .actorMovies{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .actorCard{
+    width: 20%;
+    margin: 0 16px;
+  }
+
+  .actorCard img{
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin: auto;
+  }
+
+  .actorCard h3{
+    text-align: center;
   }

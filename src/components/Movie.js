@@ -6,35 +6,48 @@ function Movie() {
     const {movieId} =useParams();
     // console.log(movieId);
 const [data, setData] = useState();
+const [trailer, setTrailer] = useState();
     //  store it in a state
     const url=`https://imdb-api.com/en/API/Title/k_uy8055ru/${movieId}`;
+
+const url2 =`https://imdb-api.com/en/API/Trailer/k_uy8055ru/${movieId}`
+
+
     useEffect(() => {
       async function fun1() {
             const result = await axios.get(url)
-            // console.log(result);
+            console.log(result);
             setData(result.data)
         }
         fun1();
     }, [url]);
+
+    useEffect(() => {
+        async function fun1() {
+              const result = await axios.get(url2);
+              setTrailer(result.data)
+          }
+          fun1();
+      }, [url2]);
     
   return (
     <div>
         <div className='coverImg'>
-            <img className='coverMainImg' />
+            <img src={trailer?.thumbnailUrl} alt='cover'  className='coverMainImg' />
         </div>
-        <div className='MovieBody'>
-                <div className='MovieContainer'>
-                    <div className='MovieRating'>
-                        <img src={null} />
+        <div className='movieBody'>
+                <div className='movieContainer'>
+                    <div className='movieRating'>
+                        <img src={data?.image} alt='displayimg' />
                         <p>
-                            <span>imdbRating</span>/10
+                            <span>{data?.imDbRating}</span>/10
                         </p>
                     </div>
                     <div className='movieDescription'>
-                        <h1>title</h1>
-                        <p>year</p>
-                        <p>genre</p>
-                        <p>desc</p>
+                        <h1>{data?.title}</h1>
+                        <p>{data?.year}</p>
+                        <p>{data?.genres}</p>
+                        <p>{data?.plot}</p>
                     </div>
                 </div>
                 <div className='cast'>
@@ -43,19 +56,23 @@ const [data, setData] = useState();
                         <p>Cast overview, first billed only</p>
                     </div>
                     <div className='castName'>
+                        {
+                            data?.actorList?.map((actor)=>(
                         <div>
-                            <Link className='actorLink' to='/'>
+                            <Link className='actorLink' to={`/actor/${actor.id}`}>
                                 <div className='castActors'>
                                     <div className='castCircle'>
-                                        <img className='cardImg' />
+                                        <img alt='actorimg' src={actor?.image} className='cardImg' />
                                     </div>
                                     <div className='castActorName'>
-                                        <h2>actor name</h2>
-                                        <p>charater</p>
+                                        <h2>{actor?.name}</h2>
+                                        <p>{actor?.asCharacter}</p>
                                     </div>
                                 </div>
                             </Link>
                         </div>
+                            ))
+                        }
                     </div>
                 </div>
         </div>
